@@ -66,9 +66,9 @@ export default function AboutPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 0.35 }}
-                    className="font-heading font-extrabold text-[2.8rem] md:text-[5rem] lg:text-[7rem] leading-[1] tracking-tight max-w-[14ch]"
+                    className="font-heading font-extrabold text-[2.8rem] md:text-[5rem] lg:text-[7rem] leading-[1.1] tracking-tight max-w-[18ch]"
                 >
-                    We're Building the Trust Layer the Creator Economy Was <span className="text-transparent border-primary-light [-webkit-text-stroke:1.5px_theme(colors.primary.light)] font-normal">Missing.</span>
+                    We're Building the Trust Layer the Creator Economy Was <span className="text-transparent font-normal" style={{ WebkitTextStroke: "1.5px var(--color-primary-light)" }}>Missing.</span>
                 </motion.h1>
 
                 <motion.p

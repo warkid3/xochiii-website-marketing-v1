@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -208,46 +209,64 @@ export function WishlistForm() {
                     )}
                 />
 
-                {watchType === "brand" && (
-                    <FormField
-                        control={form.control}
-                        name="organization"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Organization Name</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="Acme Corp"
-                                        className="bg-white text-gray-900 placeholder:text-gray-400 border-white/20 h-11"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                )}
-
-                {watchType === "creator" && (
-                    <FormField
-                        control={form.control}
-                        name="channelLink"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Primary Channel Link</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="https://instagram.com/username"
-                                        className="bg-white text-gray-900 placeholder:text-gray-400 border-white/20 h-11"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>Your main social media profile.</FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                )}
+                <AnimatePresence mode="wait">
+                    {watchType === "brand" ? (
+                        <motion.div
+                            key="brand-field"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden"
+                        >
+                            <FormField
+                                control={form.control}
+                                name="organization"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Organization Name</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Acme Corp"
+                                                className="bg-white text-gray-900 placeholder:text-gray-400 border-white/20 h-11"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            key="creator-field"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden"
+                        >
+                            <FormField
+                                control={form.control}
+                                name="channelLink"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Primary Channel Link</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="https://instagram.com/username"
+                                                className="bg-white text-gray-900 placeholder:text-gray-400 border-white/20 h-11"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormDescription>Your main social media profile.</FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <FormField
                     control={form.control}

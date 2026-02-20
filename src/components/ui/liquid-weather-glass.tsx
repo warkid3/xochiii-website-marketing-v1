@@ -1,6 +1,6 @@
 // @ts-nocheck
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { cn } from "@/lib/utils"
 
@@ -35,6 +35,16 @@ export const LiquidGlassCard = ({
     ...props
 }: LiquidGlassCardProps) => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const handleToggleExpansion = (e: {
         target: { closest: (arg0: string) => any };
@@ -107,8 +117,8 @@ export const LiquidGlassCard = ({
                         : 'collapsed'
                     : undefined,
                 onClick: expandable ? handleToggleExpansion : undefined,
-                drag: draggable,
-                dragConstraints: draggable
+                drag: isMobile ? false : draggable,
+                dragConstraints: draggable && !isMobile
                     ? { left: 0, right: 0, top: 0, bottom: 0 }
                     : undefined,
                 dragElastic: draggable ? 0.3 : undefined,
@@ -156,7 +166,7 @@ export const LiquidGlassCard = ({
             </svg>
             <MotionComponent
                 className={cn(
-                    `relative ${draggable ? 'cursor-grab active:cursor-grabbing' : ''} ${expandable ? 'cursor-pointer' : ''}`,
+                    `relative ${draggable && !isMobile ? 'cursor-grab active:cursor-grabbing' : ''} ${expandable ? 'cursor-pointer' : ''}`,
                     className
                 )}
                 style={{
