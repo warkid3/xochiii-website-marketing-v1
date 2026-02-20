@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Creator Trust Infrastructure",
+  title: "Xochiii",
   description: "The trust and transaction backbone where real creator–brand collaborations happen safely.",
 };
 
