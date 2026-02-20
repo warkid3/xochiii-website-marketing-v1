@@ -48,6 +48,20 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  --animate-pulse-slow: pulse-slow 8s ease-in-out infinite alternate;
+
+  @keyframes pulse-slow {
+    from {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+  }
 }
 
 :root {
@@ -140,6 +154,18 @@
 /* ============================================
    ANIMATIONS
    ============================================ */
+
+@keyframes pulse-slow {
+  from {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
 
 @keyframes float {
   0% {
